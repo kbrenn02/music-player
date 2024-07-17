@@ -7,6 +7,8 @@ const Discover = () => {
     const { data, isFetching, error } = useGetTopChartsQuery();
     const genreTitle = "Pop"
 
+    console.log(data)
+
     if(isFetching) return <Loader title="Loading songs..." />;
 
     if(error) return <Error />
