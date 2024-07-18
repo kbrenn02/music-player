@@ -16,11 +16,24 @@ const SongCard = ({ song, i }) => {
         backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
             <div className="relative w-full h-56 group">
                 <div className={`absolute inset-0 justify-center items-center bg-black bg-opacity-50 
-                group-hover:flex ${activeSong?.title === song.attributes.albumName ? 'flex bg-black bg-opacity-70' : 'hidden'}
+                group-hover:flex ${activeSong?.title === song.attributes.name ? 'flex bg-black bg-opacity-70' : 'hidden'}
                 `}>
                     <PlayPause />
                 </div>
                 <img alt="song_img" src={song.attributes.artwork.url} />
+
+                <div className="mt-4 flex flex-col">
+                    <p>
+                        <Link>
+                            {song.attributes.name}
+                        </Link>
+                    </p>
+                    <p>
+                        <Link>
+                            {song.attributes.artistName}
+                        </Link>
+                    </p>
+                </div>
             </div>
         </div>
     )
