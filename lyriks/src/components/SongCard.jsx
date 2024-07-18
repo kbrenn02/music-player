@@ -4,9 +4,15 @@ import PlayPause from "./PlayPause";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
 
 
-const SongCard = ({ song, i }) => {
+const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
 
-    const activeSong = 'Test'
+    const handlePauseClick = () => {
+
+    }
+
+    const handlePlayClick = () => {
+
+    }
 
     // the tutorial isn't wholly accurate to the attributes I have available. I had to adjust the "activeSong"
     // mention and the img src to work with the attributes available
@@ -18,7 +24,13 @@ const SongCard = ({ song, i }) => {
                 <div className={`absolute inset-0 justify-center items-center bg-black bg-opacity-50 
                 group-hover:flex ${activeSong?.title === song.attributes.name ? 'flex bg-black bg-opacity-70' : 'hidden'}
                 `}>
-                    <PlayPause />
+                    <PlayPause
+                        isPlaying={isPlaying}
+                        activeSong={activeSong}
+                        song={song}
+                        handlePause={handlePauseClick}
+                        handlePlay={handlePlayClick}
+                    />
                 </div>
                 <img alt="song_img" src={song.attributes.artwork.url} />
             </div>
