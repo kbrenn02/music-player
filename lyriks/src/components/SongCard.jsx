@@ -6,12 +6,15 @@ import { playPause, setActiveSong } from "../redux/features/playerSlice";
 
 const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
 
-    const handlePauseClick = () => {
+    const dispatch = useDispatch();
 
+    const handlePauseClick = () => {
+        dispatch(playPause(false));
     }
 
     const handlePlayClick = () => {
-
+        dispatch(setActiveSong({ song, data, i}));
+        dispatch(playPause(true));
     }
 
     // the tutorial isn't wholly accurate to the attributes I have available. I had to adjust the "activeSong"
@@ -22,7 +25,7 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
         backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
             <div className="relative w-full h-56 group">
                 <div className={`absolute inset-0 justify-center items-center bg-black bg-opacity-50 
-                group-hover:flex ${activeSong?.title === song.attributes.name ? 'flex bg-black bg-opacity-70' : 'hidden'}
+                group-hover:flex ${activeSong?.attributes?.name === song.attributes.name ? 'flex bg-black bg-opacity-70' : 'hidden'}
                 `}>
                     <PlayPause
                         isPlaying={isPlaying}
