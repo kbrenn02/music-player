@@ -21,19 +21,21 @@ const SongCard = ({ song, i }) => {
                     <PlayPause />
                 </div>
                 <img alt="song_img" src={song.attributes.artwork.url} />
+            </div>
 
-                <div className="mt-4 flex flex-col">
-                    <p>
-                        <Link>
-                            {song.attributes.name}
-                        </Link>
-                    </p>
-                    <p>
-                        <Link>
-                            {song.attributes.artistName}
-                        </Link>
-                    </p>
-                </div>
+{/* Will have to adjust where the links send the user after we demonstrate it in the video */}
+
+            <div className="mt-4 flex flex-col">
+                <p className="font-semibold text-lg text-white truncate">
+                    <Link to={`/songs/${song?.key}`}>
+                        {song.attributes.name}
+                    </Link>
+                </p>
+                <p className="text-sm truncate text-gray-300 mt-1">
+                    <Link to={song.attributes.artistName ? `/artists/${song?.artistName?.adamid}` : '/top-artists'}>
+                        {song.attributes.artistName}
+                    </Link>
+                </p>
             </div>
         </div>
     )
