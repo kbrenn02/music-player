@@ -83,7 +83,9 @@ const TopPlay = () => {
                             className="shadow-lg rounded-full animate-slideright"
                         >
                             <Link to={`/artists/${song?.attributes?.artistName?.id}`}>
-                                <img src={song?.images.background} alt=''/>
+                                <img src={song?.attributes.artwork.url} alt='name'
+                                className="rounded-full w-full object-cover"
+                                />
                             </Link>
                         </SwiperSlide>
                     ))}
