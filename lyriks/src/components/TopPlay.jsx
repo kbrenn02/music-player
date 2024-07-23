@@ -6,7 +6,8 @@ import { FreeMode } from 'swiper';
 
 import PlayPause from "./PlayPause";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
-import { useGetTopChartsQuery, useGetTopArtistsQuery } from "../redux/services/shazamCore";
+import { useGetTopChartsQuery } from "../redux/services/shazamCore";
+import ArtistDetails from "./ArtistDetails";
 
 import 'swiper/css';
 import 'swiper/css/free-mode'
@@ -44,10 +45,7 @@ const TopPlay = () => {
     const dispatch = useDispatch();
     const { activeSong, isPlaying } = useSelector((state) => state.player);
     const { data } = useGetTopChartsQuery();
-    const { artistData } = useGetTopArtistsQuery();
     const divRef = useRef(null);
-
-    console.log(artistData)
 
     useEffect(() => {
         divRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -112,6 +110,7 @@ const TopPlay = () => {
                             className="shadow-lg rounded-full animate-slideright"
                         >
                             <Link to={`/artists/${song?.relationships?.artists?.data[0].id}`}>
+                            <ArtistDetails artistId={song?.relationships?.artists?.data[0].id} />
                                 <img src={song?.attributes.artwork.url} alt={song?.attributes?.artistName}
                                 className="rounded-full w-full object-cover"
                                 />
