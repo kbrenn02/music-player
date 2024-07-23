@@ -110,7 +110,6 @@ const TopPlay = () => {
                             className="shadow-lg rounded-full animate-slideright"
                         >
                             <Link to={`/artists/${song?.relationships?.artists?.data[0].id}`}>
-                            <ArtistDetails artistId={song?.relationships?.artists?.data[0].id} />
                                 <img src={song?.attributes.artwork.url} alt={song?.attributes?.artistName}
                                 className="rounded-full w-full object-cover"
                                 />

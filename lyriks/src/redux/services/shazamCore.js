@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 
 export const shazamCoreApiCharts = createApi({
-    reducerPath: 'shazamApi',
+    reducerPath: 'shazamCoreApiCharts',
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://shazam-core.p.rapidapi.com/v1',
         prepareHeaders: (headers) => {
@@ -18,13 +18,8 @@ export const shazamCoreApiCharts = createApi({
     }),
 });
 
-export const {
-    useGetTopChartsQuery,
-} = shazamCoreApiCharts;
-
-
 export const shazamCoreApiArtists = createApi({
-    reducerPath: 'shazamApi',
+    reducerPath: 'shazamCoreApiArtists',
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://shazam-core.p.rapidapi.com/v2',
         prepareHeaders: (headers) => {
@@ -34,24 +29,11 @@ export const shazamCoreApiArtists = createApi({
         },
     }),
     endpoints: (builder) => ({
-        getTopArtists: builder.query({ query: () => `/artists/details?artist_id=${artistId}`})
+        getTopArtists: builder.query({ query: (artistId) => `/artists/details?artist_id=${artistId}`})
     }),
 });
 
-export const {
-    useGetTopArtistsQuery,
-} = shazamCoreApiArtists;
 
 
-// export const options = {
-//     method: 'GET',
-//     headers: {
-//       'x-rapidapi-host': 'shazam-core.p.rapidapi.com',
-//       'x-rapidapi-key': 'c2e5faeed9msh1ed7261b6244abbp1fe90ejsnd83eff727bdf'
-//     }
-//   };
-  
-//   fetch('https://shazam-core.p.rapidapi.com/v2/artists/details?artist_id={', options)
-//     .then(response => response.json())
-//     .then(response => console.log(response))
-//     .catch(err => console.error(err));
+export const { useGetTopChartsQuery } = shazamCoreApiCharts;
+export const { useGetTopArtistsQuery } = shazamCoreApiArtists;

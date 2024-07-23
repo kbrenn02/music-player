@@ -9,5 +9,9 @@ export const store = configureStore({
     [shazamCoreApiArtists.reducerPath]: shazamCoreApiArtists.reducer,
     player: playerReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(shazamCoreApiCharts.middleware, shazamCoreApiArtists.middleware)
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(
+        shazamCoreApiCharts.middleware, 
+        shazamCoreApiArtists.middleware
+    ),
 });
