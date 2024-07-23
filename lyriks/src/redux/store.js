@@ -10,7 +10,7 @@ export const store = configureStore({
     player: playerReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
+    getDefaultMiddleware({serializableCheck: false}).concat(
         shazamCoreApiCharts.middleware, 
         shazamCoreApiArtists.middleware
     ),
