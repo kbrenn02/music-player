@@ -1,20 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useGetTopArtistsQuery } from '../redux/services/shazamCore';
 
 const ArtistDetails = ({ artistId }) => {
-    const { data, error, isLoading } = useGetTopArtistsQuery(artistId);
+
+    const [cachedData, setCachedData] = useState(null);
+    const { data, error, isLoading } = useGetTopArtistsQuery(artistId, {
+        skip: !!cachedData, // Skip query if data is cached
+        onSuccess: (data) => setCachedData(data) // Cache data on success
+    });
   
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
-    console.log("Top artist data", data)
+    console.log("Artist data:", data);
   
     return (
-        <div>
-          <img src={data?.attributes?.artwork?.url} alt={data?.attributes?.name} className="rounded-full w-full object-cover" />
-          <h3>{data?.attributes?.name}</h3>
-        </div>
-      );
-  };
+        <img 
+            src={data?.attributes?.artwork?.url} 
+            alt={data?.attributes?.name} 
+            className="rounded-full w-full object-cover"
+        />
+    )
+};
 
 export default ArtistDetails
