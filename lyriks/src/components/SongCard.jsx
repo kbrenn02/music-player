@@ -42,12 +42,12 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
 
             <div className="mt-4 flex flex-col">
                 <p className="font-semibold text-lg text-white truncate">
-                    <Link to={`/songs/${song?.key}`}>
+                    <Link to={`/songs/${song?.id}`}>
                         {song.attributes.name}
                     </Link>
                 </p>
                 <p className="text-sm truncate text-gray-300 mt-1">
-                    <Link to={song.attributes.artistName ? `/artists/${song?.artistName?.adamid}` : '/top-artists'}>
+                    <Link to={song.attributes.artistName ? `/artists/${song?.relationships?.artists?.data[0].id}` : '/top-artists'}>
                         {song.attributes.artistName}
                     </Link>
                 </p>
