@@ -11,7 +11,15 @@ const SongDetails = () => {
     const { activeSong, isPlaying } = useSelector((state) => state.player);
     const { data: songData, isFetching: isFetchingSongDetails } = useGetSongDetailsQuery(songid)
 
+    // const lyricsData = songData.resources.lyrics
+    // const lyricsKeys = Object.keys(lyricsData);
+    // const dynamicKey = lyricsKeys[0]; // Assuming there's only one key, or modify to handle multiple keys
+    
+    // const attributes = lyricsData[dynamicKey].attributes;
+    // const lyricsText = attributes.text;
+    // console.log(lyricsText)
     console.log(songid)
+    console.log(songData.resources.lyrics)
 
     return (
         <div className="flex flex-col">
