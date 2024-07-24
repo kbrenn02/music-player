@@ -6,7 +6,7 @@ import { FreeMode } from 'swiper';
 
 import PlayPause from "./PlayPause";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
-import { useGetTopChartsQuery } from "../redux/services/shazamCore";
+import { useGetTopChartsQuery, useGetTopArtistsQuery } from "../redux/services/shazamCore";
 import ArtistDetails from "./ArtistDetails";
 
 import 'swiper/css';
@@ -52,6 +52,13 @@ const TopPlay = () => {
     });
 
     const topPlays = data?.slice(0, 5);
+    const artistIds = topPlays?.map((song) => song?.relationships?.artists?.data[0].id);
+    console.log("topPlays", topPlays)
+    console.log('artistIDs', artistIds)
+
+    const artistImages = artistIds?.map(id => (
+        <ArtistDetails key={id} artistId={id} />
+    ));
 
     const handlePauseClick = () => {
         dispatch(playPause(false));
@@ -110,7 +117,7 @@ const TopPlay = () => {
                             className="shadow-lg rounded-full animate-slideright"
                         >
                             <Link to={`/artists/${song?.relationships?.artists?.data[0].id}`}>
-                                <ArtistDetails i={i} artistId={song?.relationships?.artists?.data[0].id}/>
+                                {artistImages[i]}
                             </Link>
                         </SwiperSlide>
                     ))}
