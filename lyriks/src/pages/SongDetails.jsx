@@ -19,7 +19,7 @@ const SongDetails = () => {
     // const lyricsText = attributes.text;
     // console.log(lyricsText)
     console.log('chosen song', songid)
-    console.log('chosen song data', songData?.resources?.lyrics)
+    console.log('chosen song data', songData?.resources)
 
     return (
         <div className="flex flex-col">
@@ -29,8 +29,9 @@ const SongDetails = () => {
                 <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
 
                 <div className="mt-5">
-                    {songData?.resources?.lyrics[0]?.type === 'lyrics'
-                        ? songData?.resources?.lyrics?.attributes?.text.map((line, i) => (
+                    {/* {songData?.resources?.lyrics[0]?.type === 'lyrics' */}
+                    { true
+                        ? songData?.resources?.lyrics[35422193]?.attributes?.text.map((line, i) => (
                             <p key={i} className="text-gray-400 text-base my-1">{line}</p>
                         )) :<p className="text-gray-400 text-base my-1">Sorry, no lyrics found</p>}
                 </div>
