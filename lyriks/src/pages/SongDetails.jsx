@@ -18,12 +18,12 @@ const SongDetails = () => {
     // const attributes = lyricsData[dynamicKey].attributes;
     // const lyricsText = attributes.text;
     // console.log(lyricsText)
-    console.log(songid)
-    console.log(songData.resources.lyrics)
+    console.log('chosen song', songid)
+    console.log('chosen song data', songData?.resources?.lyrics)
 
     return (
         <div className="flex flex-col">
-            {/* <DetailsHeader artistId={artistId} songData={songData}/> */}
+            <DetailsHeader artistId='' songData={songData}/>
 
             <div className="mb-10">
                 <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
