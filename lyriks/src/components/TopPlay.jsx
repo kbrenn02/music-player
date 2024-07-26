@@ -117,6 +117,7 @@ const TopPlay = () => {
                             className="shadow-lg rounded-full animate-slideright"
                         >
                             <Link to={`/artists/${song?.relationships?.artists?.data[0].id}`}>
+                                {/* Fix this: show the artist image for the top 5 artists without loading */}
                                 {artistImages[i]}
                             </Link>
                         </SwiperSlide>

@@ -31,6 +31,7 @@ const SongDetails = () => {
                 <div className="mt-5">
                     {/* {songData?.resources?.lyrics[0]?.type === 'lyrics' */}
                     { true
+                    // Fix this: show the lyrics for a song. Any song
                         ? songData?.resources?.lyrics[34769645]?.attributes?.text.map((line, i) => (
                             <p key={i} className="text-gray-400 text-base my-1">{line}</p>
                         )) :<p className="text-gray-400 text-base my-1">Sorry, no lyrics found</p>}
