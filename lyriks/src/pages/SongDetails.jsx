@@ -30,6 +30,8 @@ const SongDetails = () => {
     // console.log(lyricsText)
     console.log('chosen song', songid)
     console.log('chosen song data', songData?.resources)
+    // Fix this: looks like the getsongrelatedquery is showing the same data as the getsongdetailsquery
+    console.log("related songs data: ", data)
 
     if(isFetchingSongDetails || isFetchingRelatedSongs) return <Loader title='Searching song details' />;
 
