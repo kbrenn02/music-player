@@ -1,1 +1,1 @@
-# music-player
+# Music Player: Spotify-inspired app
