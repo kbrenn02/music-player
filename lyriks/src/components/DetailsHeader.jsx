@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
-import ArtistDetails from './ArtistDetails';
+// import ArtistDetails from './ArtistDetails';
 
 
 const DetailsHeader = ({ artistId, artistData, songData }) => {
 
-    const artist = artistData?.artists[artistId]?.attributes
+    const artist = artistData?.data[0]?.attributes
 
     return (
         <div className='relative w-full flex flex-col'>
@@ -14,7 +14,7 @@ const DetailsHeader = ({ artistId, artistData, songData }) => {
                 <img 
                     alt='art'
                     // Fix this: show the artist image or the song cover art
-                    src={artistId ? <ArtistDetails artistId={artistId} /> : songData?.attributes?.artwork?.url}
+                    // src={artistId ? <ArtistDetails artistId={artistId} /> : songData?.attributes?.artwork?.url}
                     className='sm:w-48 w-28 sm:h-48 h-28 rounded-full object-cover border-2 shadow-xl shadow-black'
                 />
 

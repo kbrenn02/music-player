@@ -6,8 +6,8 @@ import { FreeMode } from 'swiper';
 
 import PlayPause from "./PlayPause";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
-import { useGetTopChartsQuery, useGetTopArtistsQuery } from "../redux/services/shazamCore";
-import ArtistDetails from "./ArtistDetails";
+import { useGetTopChartsQuery } from "../redux/services/shazamCore";
+// import ArtistDetails from "./ArtistDetails";
 
 import 'swiper/css';
 import 'swiper/css/free-mode'
@@ -56,9 +56,9 @@ const TopPlay = () => {
     console.log("topPlays", topPlays)
     console.log('artistIDs', artistIds)
 
-    const artistImages = artistIds?.map(id => (
-        <ArtistDetails key={id} artistId={id} />
-    ));
+    // const artistImages = artistIds?.map(id => (
+    //     <ArtistDetails key={id} artistId={id} />
+    // ));
 
     const handlePauseClick = () => {
         dispatch(playPause(false));
@@ -118,7 +118,8 @@ const TopPlay = () => {
                         >
                             <Link to={`/artists/${song?.relationships?.artists?.data[0].id}`}>
                                 {/* Fix this: show the artist image for the top 5 artists without loading */}
-                                {artistImages[i]}
+                                {/* {artistImages[i]} */}
+                                Blah
                             </Link>
                         </SwiperSlide>
                     ))}

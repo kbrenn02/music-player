@@ -6,20 +6,9 @@ import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
 import { useGetArtistDetailsQuery } from "../redux/services/shazamCore";
 
 const ArtistDetails = () => {
-    const dispatch = useDispatch();
-    const { songid } = useParams();
+    const { id: artistId } = useParams();
     const { activeSong, isPlaying } = useSelector((state) => state.player);
-    const { data: songData, isFetching: isFetchingSongDetails } = useGetSongDetailsQuery(songid)
-    const { data, isFetching: isFetchingRelatedSongs, error } = useGetSongRelatedQuery(songid)
-
-    const handlePauseClick = () => {
-        dispatch(playPause(false));
-    }
-
-    const handlePlayClick = (song, i) => {
-        dispatch(setActiveSong({ song, data, i}));
-        dispatch(playPause(true));
-    }
+    const { data: artistData, isFetching: isFetchingArtistDetails, error } = useGetArtistDetailsQuery(artistId)
 
     // const lyricsData = songData.resources.lyrics
     // const lyricsKeys = Object.keys(lyricsData);
@@ -28,39 +17,28 @@ const ArtistDetails = () => {
     // const attributes = lyricsData[dynamicKey].attributes;
     // const lyricsText = attributes.text;
     // console.log(lyricsText)
-    console.log('chosen song', songid)
-    console.log('chosen song data', songData?.resources)
+    // console.log('chosen song', songid)
+    // console.log('chosen song data', songData?.resources)
     // Fix this: looks like the getsongrelatedquery is showing the same data as the getsongdetailsquery
-    console.log("related songs data: ", data)
+    // console.log("related songs data: ", data)
+    console.log('Artist data: ', artistData?.data[0]?.views['top-songs']?.data[0]?.attributes?.name)
+    
 
-    if(isFetchingSongDetails || isFetchingRelatedSongs) return <Loader title='Searching song details' />;
+    if(isFetchingArtistDetails) return <Loader title='Loading artist details' />;
 
-    if (error) return <Error />
+    if (error) return <Error />;
+    console.log(error)
 
     return (
         <div className="flex flex-col">
-            <DetailsHeader artistId='' songData={songData}/>
+            <DetailsHeader artistId={artistId} artistData={artistData}/>
 
-            <div className="mb-10">
-                <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
-
-                <div className="mt-5">
-                    {/* {songData?.resources?.lyrics[0]?.type === 'lyrics' */}
-                    { true
-                    // Fix this: show the lyrics for a song. Any song
-                        ? songData?.resources?.lyrics[34769645]?.attributes?.text.map((line, i) => (
-                            <p key={i} className="text-gray-400 text-base my-1">{line}</p>
-                        )) :<p className="text-gray-400 text-base my-1">Sorry, no lyrics found</p>}
-                </div>
-            </div>
-
-            {/* <RelatedSongs 
-                data={data}
+            <RelatedSongs 
+                // data={Object.values(artistData?.songs)}
+                artistId={artistId}
                 isPlaying={isPlaying}
                 activeSong={activeSong}
-                handlePauseClick={handlePauseClick}
-                handlePlayClick={handlePlayClick}
-            /> */}
+            />
         </div>
     )
 };
