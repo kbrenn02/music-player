@@ -21,7 +21,9 @@ const ArtistDetails = () => {
     // console.log('chosen song data', songData?.resources)
     // Fix this: looks like the getsongrelatedquery is showing the same data as the getsongdetailsquery
     // console.log("related songs data: ", data)
-    console.log('Artist data: ', artistData?.data[0]?.views['top-songs']?.data[0]?.attributes?.name)
+    // Fix this: this, up to ?.data without specifying an object in the array, gets to the artists top 10 songs. need to pass
+    // it to RelatedSongs correctly
+    console.log('Artist data: ', artistData?.data[0]?.views['top-songs']?.data)//[0]?.attributes?.name)
     
 
     if(isFetchingArtistDetails) return <Loader title='Loading artist details' />;
