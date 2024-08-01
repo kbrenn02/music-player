@@ -13,6 +13,9 @@ const Search = () => {
     
     const songs = data?.tracks?.hits?.map((song) => song.track);
     console.log('songs: ', songs)
+    // Fix this: the song data is as expected, but it isn't in the same format as the original data. What
+    // I could do it create a different SongCard component that actually takes the search data as is
+    // It will basically be a copy of the songCard but with slight modifications to the input data
 
     if(isFetching) return <Loader title="Loading top charts" />
 
@@ -26,6 +29,7 @@ const Search = () => {
 
             <div className="flex flex-wrap sm:justify-start justify-center gap-8">
                 {/* {songs?.map((song, i) => i < 50 && (
+                    // Fix this
                     <SongCard 
                         key={i}
                         song={song}
