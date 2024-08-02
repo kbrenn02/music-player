@@ -15,4 +15,4 @@ Once you have the application running on your local device, explore! You can exp
 see any top charts and top artists, listen to the music, or see the lyrics for your favorite songs!
 
 ### FINAL PROJECT V1:
-[{Video demo}]
+[{Video demo}] 
