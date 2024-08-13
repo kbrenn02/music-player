@@ -45,7 +45,7 @@ const SongDetails = () => {
         } else {
             console.log('Fetching complete, songData:', songData);}
 
-        console.log(songData.resources)
+        // console.log(songData.resources)
 
         if (songData && songData.resources.artists) {
             const artistId = Object.keys(songData?.resources?.artists)[0]; // Get the first artist ID

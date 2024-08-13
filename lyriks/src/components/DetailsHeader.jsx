@@ -24,23 +24,23 @@ const DetailsHeader = ({ artistId, artistData, songData }) => {
                     className='sm:w-48 w-28 sm:h-48 h-28 rounded-full object-cover border-2 shadow-xl shadow-black'
                 />
 
-                {/* <div className="ml-5">
-                    {/* Fix this: should be showing the artist name. If it doesn't, it should show the song title *
+                <div className="ml-5">
+                    {/* Fix this: should be showing the artist name. If it doesn't, it should show the song title */}
                     <p className='font-bold sm:text-3xl text-xl text-white'>{artistId ? artist?.name : songData?.title}</p>
                     {!artistId && (
                         <Link to={`/artists/${songData?.relationships?.artists?.data[0].id}`}>
-                            {/* Fix this: This should show the artist name *
+                            {/* Fix this: This should show the artist name */}
                             <p className='text-base text-gray-400 mt-2'>{songData?.attributes?.artistName}</p>
                         </Link>
                     )}
 
                     <p className='text-base text-gray-400 mt-2'>
-                        {/* Fix this: This should show the artist genre or the song genre *
+                        {/* Fix this: This should show the artist genre or the song genre */}
                         {artistId
                           ? artist?.genreNames[0]
                           : songData?.genres?.primary}
                     </p>
-                </div> */}
+                </div>
             </div>
 
             <div className='w-full sm:h-44 h-24'/>
