@@ -13,6 +13,8 @@ const SongDetails = () => {
     const { data: songData, isFetching: isFetchingSongDetails } = useGetSongDetailsQuery(songid)
     const { data, isFetching: isFetchingRelatedSongs, error } = useGetSongRelatedQuery(songid)
     const [artistId, setArtistId] = useState(null);
+    const [lyrics, setLyrics] = useState([]);
+    const [type, setType] = useState('')
 
     const handlePauseClick = () => {
         dispatch(playPause(false));
@@ -32,7 +34,7 @@ const SongDetails = () => {
     // console.log(lyricsText)
     console.log('chosen song', songid)
     // console.log('artist: ', artistId)
-    console.log('chosen song data', songData?.resources)
+    console.log('chosen song data', songData)
     // Fix this: looks like the getsongrelatedquery is showing the same data as the getsongdetailsquery
     console.log("related songs data: ", data)
 
@@ -57,7 +59,22 @@ const SongDetails = () => {
             } else {
               console.warn('Artist data is undefined or null');
             }
-          }
+        }
+
+        if (songData && songData.resources.lyrics) {
+            const lyricId = Object.keys(songData?.resources?.lyrics)[0];
+            const lyricAttributes = songData?.resources?.lyrics[lyricId]?.attributes;
+            const lyricData = songData?.resources?.lyrics[lyricId];
+
+            if (lyricAttributes){
+                console.log('lyric attributes', lyricAttributes);
+                setLyrics(lyricAttributes.text);
+                setType(lyricData.type);
+                console.log(lyrics)
+            } else {
+                console.warn('There is no lyric data')
+            }
+        }
       }, [isFetchingSongDetails, songData]);
 
 
@@ -74,15 +91,15 @@ const SongDetails = () => {
                 <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
 
                 <div className="mt-5">
-                    {/* {songData?.resources?.lyrics[0]?.type === 'lyrics' */}
-                    { true
-                    // Fix this: show the lyrics for a song. Any song
-                        ? songData?.resources?.lyrics[34769645]?.attributes?.text.map((line, i) => (
+                    {type === 'lyrics'
+                    // Fixed this: show the lyrics for a song. Any song
+                        ? lyrics.map((line, i) => (
                             <p key={i} className="text-gray-400 text-base my-1">{line}</p>
                         )) :<p className="text-gray-400 text-base my-1">Sorry, no lyrics found</p>}
                 </div>
             </div>
 
+{/* Fix this: whole card */}
             {/* <RelatedSongs 
                 data={data}
                 isPlaying={isPlaying}
