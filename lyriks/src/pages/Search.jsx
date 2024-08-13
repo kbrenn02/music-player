@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Error, Loader, SongCard } from '../components';
+import { Error, Loader, SongCard2 } from '../components';
 import { useGetSongsBySearchQuery } from "../redux/services/shazamCore";
 
 
@@ -28,9 +28,9 @@ const Search = () => {
             </h2>
 
             <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-                {/* {songs?.map((song, i) => i < 50 && (
+                {songs?.map((song, i) => i < 50 && (
                     // Fix this
-                    <SongCard 
+                    <SongCard2 
                         key={i}
                         song={song}
                         isPlaying={isPlaying}
@@ -38,11 +38,10 @@ const Search = () => {
                         data={songs}
                         i={i}
                     />
-                ))} */}
+                ))}
             </div>
         </div>
     )
-
 }
 
 export default Search;
