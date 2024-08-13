@@ -19,6 +19,7 @@ const DetailsHeader = ({ artistId, artistData, songData }) => {
                 <img 
                     alt='art'
                     // Fixed this: show the artist image or the song cover art. No errors but not showing artist avatar
+                    // Artist image
                     src={artistId ? songAttributes?.images?.artistAvatar 
                         : artistData?.attributes?.artwork?.url
                         .replace('{w}', '500')
