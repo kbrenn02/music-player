@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-// import { useGetTopArtistsQuery } from '../redux/services/shazamCore';
+// import { useGetArtistDetailsQuery } from '../redux/services/shazamCore';
 
 const ArtistDetails = ({ artistId, i }) => {
 
     const [retry, setRetry] = useState(0);
     const [loadedImages, setLoadedImages] = useState([]);
 
-    // const { data, error, isLoading } = useGetTopArtistsQuery(artistId);
+    // const { data, error, isLoading } = useGetArtistDetailsQuery(artistId);
 
     // Retry fetching data every 3 seconds if there is an error
     useEffect(() => {

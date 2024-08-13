@@ -1,16 +1,18 @@
 import { useParams } from "react-router-dom"; // this gives access to the URL bar
 import { useSelector, useDispatch } from 'react-redux';
 import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
+import { useEffect, useState } from "react";
 
 import { setActiveSong, playPause } from "../redux/features/playerSlice";
 import { useGetSongDetailsQuery, useGetSongRelatedQuery } from "../redux/services/shazamCore";
-
+ 
 const SongDetails = () => {
     const dispatch = useDispatch();
     const { songid } = useParams();
     const { activeSong, isPlaying } = useSelector((state) => state.player);
     const { data: songData, isFetching: isFetchingSongDetails } = useGetSongDetailsQuery(songid)
     const { data, isFetching: isFetchingRelatedSongs, error } = useGetSongRelatedQuery(songid)
+    const [artistId, setArtistId] = useState(null);
 
     const handlePauseClick = () => {
         dispatch(playPause(false));
@@ -29,17 +31,44 @@ const SongDetails = () => {
     // const lyricsText = attributes.text;
     // console.log(lyricsText)
     console.log('chosen song', songid)
+    // console.log('artist: ', artistId)
     console.log('chosen song data', songData?.resources)
     // Fix this: looks like the getsongrelatedquery is showing the same data as the getsongdetailsquery
     console.log("related songs data: ", data)
 
-    if(isFetchingSongDetails || isFetchingRelatedSongs) return <Loader title='Searching song details' />;
+    useEffect(() => {
 
+        console.log('useEffect triggered');
+  
+        if (isFetchingSongDetails) {
+            console.log('Still fetching song details...');
+        } else {
+            console.log('Fetching complete, songData:', songData);}
+
+        console.log(songData.resources)
+
+        if (songData && songData.resources.artists) {
+            const artistId = Object.keys(songData?.resources?.artists)[0]; // Get the first artist ID
+            const artistData = songData?.resources?.artists[artistId];
+            
+            if (artistData) {
+              console.log('artist data:', artistData);  // Use artistData safely
+              setArtistId(artistId);    // Set artistId in state if valid
+            } else {
+              console.warn('Artist data is undefined or null');
+            }
+          }
+      }, [isFetchingSongDetails, songData]);
+
+
+
+    if(isFetchingSongDetails || isFetchingRelatedSongs) return <Loader title='Searching song details' />;
+    
     if (error) return <Error />
 
     return (
         <div className="flex flex-col">
-            <DetailsHeader artistId='' songData={songData}/>
+            <DetailsHeader artistId={artistId} songData={songData}/>
 
             <div className="mb-10">
                 <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
