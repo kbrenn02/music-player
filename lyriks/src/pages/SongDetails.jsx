@@ -36,7 +36,7 @@ const SongDetails = () => {
     console.log('chosen song', songid)
     // console.log('artist: ', artistId)
     console.log('chosen song data', songData)
-    // Fix this: looks like the getsongrelatedquery is showing the same data as the getsongdetailsquery
+    // Fixed this: looks like the getsongrelatedquery is showing the same data as the getsongdetailsquery
     console.log("related songs data: ", data)
 
     useEffect(() => {
@@ -94,7 +94,7 @@ const SongDetails = () => {
             <h1 className="text-white text-3xl font-bold mb-4">{titleId?.attributes?.title}</h1>
 
             <div className="mb-10">
-                <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
+                <h2 className="text-white text-2xl font-bold">Lyrics:</h2>
 
                 <div className="mt-5">
                     {type === 'lyrics'

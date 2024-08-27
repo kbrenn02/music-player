@@ -12,7 +12,7 @@ const ArtistDetails = () => {
     const { activeSong, isPlaying } = useSelector((state) => state.player);
     const { data: artistData, isFetching: isFetchingArtistDetails, error } = useGetArtistDetailsQuery(artistId)
 
-    // Fix this: this, up to ?.data without specifying an object in the array, gets to the artists top 10 songs. need to pass
+    // Fixed this: this, up to ?.data without specifying an object in the array, gets to the artists top 10 songs. need to pass
     // it to RelatedSongs correctly
     console.log('Full Artist Data: ', artistData?.data[0]);
     console.log('Artist data: ', artistData?.data[0]?.views['top-songs']?.data)

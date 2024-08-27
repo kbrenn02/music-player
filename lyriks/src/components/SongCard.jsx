@@ -17,8 +17,6 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
         dispatch(playPause(true));
     }
 
-    // the tutorial isn't wholly accurate to the attributes I have available. I had to adjust the "activeSong"
-    // mention and the img src to work with the attributes available
 
     return (
         <div className="flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 
