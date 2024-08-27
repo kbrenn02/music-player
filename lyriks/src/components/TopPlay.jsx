@@ -111,7 +111,7 @@ const TopPlay = () => {
                             className="shadow-lg rounded-full animate-slideright"
                         >
                             <img
-                                className="shadow-lg rounded-full"
+                                className="shadow-lg rounded-full w-2/3"
                                 src={song.attributes.artwork.url} alt={song.attributes.name} 
                             />
                         </SwiperSlide>

@@ -23,7 +23,7 @@ const ArtistDetails = () => {
     // console.log("related songs data: ", data)
     // Fix this: this, up to ?.data without specifying an object in the array, gets to the artists top 10 songs. need to pass
     // it to RelatedSongs correctly
-    console.log('Full Artist Data: ', artistData);
+    console.log('Full Artist Data: ', artistData?.data[0]);
     console.log('Artist data: ', artistData?.data[0]?.views['top-songs']?.data)//[0]?.attributes?.name)
     
 
@@ -35,7 +35,7 @@ const ArtistDetails = () => {
     return (
         <div className="flex flex-col">
             
-        {/* <div className='relative w-full flex flex-col'>
+        <div className='relative w-full flex flex-col'>
             <div className='w-full bg-gradient-to-l from-transparent to-black sm:h-48 h-28'/>
             
             <div className='absolute inset-0 flex items-center'>
@@ -43,8 +43,8 @@ const ArtistDetails = () => {
                     alt='art'
                     // Fixed this: show the artist image or the song cover art. No errors but not showing artist avatar
                     // Artist image
-                    src={artistId ? songAttributes?.images?.artistAvatar 
-                        : artistData?.attributes?.artwork?.url
+                    src={artistId ? artistData?.data[0]?.avatar 
+                        : "No Avatar"
                         .replace('{w}', '500')
                         .replace('{h}', '500') 
                         }
@@ -52,21 +52,21 @@ const ArtistDetails = () => {
                 />
 
                 <div className="ml-5">
-                    {/* Fixed this: should be showing the artist name. If it doesn't, it should show the song title. Messed with sizing here and it still doesnt show. *
-                    <p className='font-bold sm:text-3xl text-xl text-white'>{artistId ? songAttributes.artist : artistData?.name }</p>
+                    {/* Fixed this: should be showing the artist name. If it doesn't, it should show the song title. Messed with sizing here and it still doesnt show. */}
+                    <p className='font-bold sm:text-3xl text-xl text-white'>{artistId ? artistData?.data[0]?.attributes?.name : "No Name" }</p>
 
                     <p className='text-base text-gray-400 mt-2'>
-                        {/* Fixed this: This should show the artist genre or the song genre *
+                        {/* Fixed this: This should show the artist genre or the song genre */}
                         {artistId
-                          ? songAttributes?.genres?.primary
-                          : artistData?.genreNames[0]
+                          ? artistData?.data[0]?.attributes?.genreNames[0]
+                          : "No genre"
                         }
                     </p>
                 </div>
             </div>
 
             <div className='w-full sm:h-44 h-24'/>
-        </div> */}
+        </div>
     
         </div>
     )
