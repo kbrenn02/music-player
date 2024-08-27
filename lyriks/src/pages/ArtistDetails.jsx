@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom"; // this gives access to the URL bar
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Error, Loader, RelatedSongs } from '../components';
+import { setActiveSong, playPause } from "../redux/features/playerSlice";
 
 
 import { useGetArtistDetailsQuery } from "../redux/services/shazamCore";
 
 const ArtistDetails = () => {
+    const dispatch = useDispatch();
     const { id: artistId } = useParams();
     const { activeSong, isPlaying } = useSelector((state) => state.player);
     const { data: artistData, isFetching: isFetchingArtistDetails, error } = useGetArtistDetailsQuery(artistId)
@@ -15,6 +17,15 @@ const ArtistDetails = () => {
     console.log('Full Artist Data: ', artistData?.data[0]);
     console.log('Artist data: ', artistData?.data[0]?.views['top-songs']?.data)
     const related = artistData?.data[0]?.views['top-songs']?.data
+
+    const handlePauseClick = () => {
+        dispatch(playPause(false));
+    }
+
+    const handlePlayClick = (song, i) => {
+        dispatch(setActiveSong({ song, artistData, i}));
+        dispatch(playPause(true));
+    }
     
 
     if(isFetchingArtistDetails) return <Loader title='Loading artist details' />;
@@ -62,6 +73,8 @@ const ArtistDetails = () => {
                 data={related}
                 isPlaying={isPlaying}
                 activeSong={activeSong}
+                handlePauseClick={handlePauseClick}
+                handlePlayClick={handlePlayClick}
         />
     
         </div>

@@ -13,6 +13,7 @@ const SongDetails = () => {
     const { data: songData, isFetching: isFetchingSongDetails } = useGetSongDetailsQuery(songid)
     const { data, isFetching: isFetchingRelatedSongs, error } = useGetSongRelatedQuery(songid)
     const [artistId, setArtistId] = useState(null);
+    const [titleId, setTitleId] = useState(null);
     const [lyrics, setLyrics] = useState([]);
     const [type, setType] = useState('')
 
@@ -52,10 +53,14 @@ const SongDetails = () => {
         if (songData && songData.resources.artists) {
             const artistId = Object.keys(songData?.resources?.artists)[0]; // Get the first artist ID
             const artistData = songData?.resources?.artists[artistId];
+            const titleId = Object.keys(songData?.resources?.albums)[0];
+            const title = songData?.resources?.albums[titleId];
             
             if (artistData) {
               console.log('artist data:', artistData);  // Use artistData safely
+              console.log('title:', title);
               setArtistId(artistId);    // Set artistId in state if valid
+              setTitleId(title)
             } else {
               console.warn('Artist data is undefined or null');
             }
@@ -77,6 +82,8 @@ const SongDetails = () => {
         }
       }, [isFetchingSongDetails, songData]);
 
+    
+    
 
 
     if(isFetchingSongDetails || isFetchingRelatedSongs) return <Loader title='Searching song details' />;
@@ -86,6 +93,8 @@ const SongDetails = () => {
     return (
         <div className="flex flex-col">
             <DetailsHeader artistId={artistId} songData={songData}/>
+
+            <h1 className="text-white text-3xl font-bold mb-4">{titleId?.attributes?.name}</h1>
 
             <div className="mb-10">
                 <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
