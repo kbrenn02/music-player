@@ -9,7 +9,7 @@ const RelatedSongs = ({ data, isPlaying, activeSong, handlePauseClick, handlePla
             {data?.map((song, i) => (
                 <SongBar 
                     key={i}
-                    song={song}
+                    song={song.id}
                     i={i}
                     artistId={artistId}
                     isPlaying={isPlaying}

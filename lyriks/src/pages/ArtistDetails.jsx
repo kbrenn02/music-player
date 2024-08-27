@@ -14,6 +14,7 @@ const ArtistDetails = () => {
     // it to RelatedSongs correctly
     console.log('Full Artist Data: ', artistData?.data[0]);
     console.log('Artist data: ', artistData?.data[0]?.views['top-songs']?.data)
+    const related = artistData?.data[0]?.views['top-songs']?.data
     
 
     if(isFetchingArtistDetails) return <Loader title='Loading artist details' />;
@@ -56,6 +57,12 @@ const ArtistDetails = () => {
 
             <div className='w-full sm:h-44 h-24'/>
         </div>
+
+        <RelatedSongs 
+                data={related}
+                isPlaying={isPlaying}
+                activeSong={activeSong}
+        />
     
         </div>
     )
