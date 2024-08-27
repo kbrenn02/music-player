@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import PlayPause from "./PlayPause";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
-import ArtistDetails from "./ArtistDetails";
 
 
 const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
@@ -48,7 +47,9 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
                     </Link>
                 </p>
                 <p className="text-sm truncate text-gray-300 mt-1">
+                    <Link to={`/artists/${song?.relationships?.artists?.data[0].id}`}>
                         {song.attributes.artistName}
+                    </Link>
                 </p>
             </div>
         </div>
