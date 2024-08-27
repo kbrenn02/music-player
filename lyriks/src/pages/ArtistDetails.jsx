@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"; // this gives access to the URL bar
 import { useSelector } from 'react-redux';
-import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
+import { Error, Loader, RelatedSongs } from '../components';
 
 
 import { useGetArtistDetailsQuery } from "../redux/services/shazamCore";
@@ -10,21 +10,10 @@ const ArtistDetails = () => {
     const { activeSong, isPlaying } = useSelector((state) => state.player);
     const { data: artistData, isFetching: isFetchingArtistDetails, error } = useGetArtistDetailsQuery(artistId)
 
-    // const lyricsData = songData.resources.lyrics
-    // const lyricsKeys = Object.keys(lyricsData);
-    // const dynamicKey = lyricsKeys[0]; // Assuming there's only one key, or modify to handle multiple keys
-    
-    // const attributes = lyricsData[dynamicKey].attributes;
-    // const lyricsText = attributes.text;
-    // console.log(lyricsText)
-    // console.log('chosen song', songid)
-    // console.log('chosen song data', songData?.resources)
-    // Fix this: looks like the getsongrelatedquery is showing the same data as the getsongdetailsquery
-    // console.log("related songs data: ", data)
     // Fix this: this, up to ?.data without specifying an object in the array, gets to the artists top 10 songs. need to pass
     // it to RelatedSongs correctly
     console.log('Full Artist Data: ', artistData?.data[0]);
-    console.log('Artist data: ', artistData?.data[0]?.views['top-songs']?.data)//[0]?.attributes?.name)
+    console.log('Artist data: ', artistData?.data[0]?.views['top-songs']?.data)
     
 
     if(isFetchingArtistDetails) return <Loader title='Loading artist details' />;
@@ -41,7 +30,7 @@ const ArtistDetails = () => {
             <div className='absolute inset-0 flex items-center'>
                 <img 
                     alt='art'
-                    // Fixed this: show the artist image or the song cover art. No errors but not showing artist avatar
+                    // Fixed this: show the artist image
                     // Artist image
                     src={artistId ? artistData?.data[0]?.avatar 
                         : "No Avatar"
@@ -52,11 +41,11 @@ const ArtistDetails = () => {
                 />
 
                 <div className="ml-5">
-                    {/* Fixed this: should be showing the artist name. If it doesn't, it should show the song title. Messed with sizing here and it still doesnt show. */}
+                    {/* Fixed this: should be showing the artist name. */}
                     <p className='font-bold sm:text-3xl text-xl text-white'>{artistId ? artistData?.data[0]?.attributes?.name : "No Name" }</p>
 
                     <p className='text-base text-gray-400 mt-2'>
-                        {/* Fixed this: This should show the artist genre or the song genre */}
+                        {/* Fixed this: This should show the artist genre */}
                         {artistId
                           ? artistData?.data[0]?.attributes?.genreNames[0]
                           : "No genre"
