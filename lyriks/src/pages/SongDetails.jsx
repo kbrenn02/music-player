@@ -53,8 +53,8 @@ const SongDetails = () => {
         if (songData && songData.resources.artists) {
             const artistId = Object.keys(songData?.resources?.artists)[0]; // Get the first artist ID
             const artistData = songData?.resources?.artists[artistId];
-            const titleId = Object.keys(songData?.resources?.albums)[0];
-            const title = songData?.resources?.albums[titleId];
+            const titleId = Object.keys(songData?.resources['shazam-songs'])[0];
+            const title = songData?.resources['shazam-songs'][titleId];
             
             if (artistData) {
               console.log('artist data:', artistData);  // Use artistData safely
@@ -80,10 +80,7 @@ const SongDetails = () => {
                 console.warn('There is no lyric data')
             }
         }
-      }, [isFetchingSongDetails, songData]);
-
-    
-    
+    }, [isFetchingSongDetails, songData]);
 
 
     if(isFetchingSongDetails || isFetchingRelatedSongs) return <Loader title='Searching song details' />;
@@ -94,7 +91,7 @@ const SongDetails = () => {
         <div className="flex flex-col">
             <DetailsHeader artistId={artistId} songData={songData}/>
 
-            <h1 className="text-white text-3xl font-bold mb-4">{titleId?.attributes?.name}</h1>
+            <h1 className="text-white text-3xl font-bold mb-4">{titleId?.attributes?.title}</h1>
 
             <div className="mb-10">
                 <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
@@ -107,15 +104,6 @@ const SongDetails = () => {
                         )) :<p className="text-gray-400 text-base my-1">Sorry, no lyrics found</p>}
                 </div>
             </div>
-
-{/* Fix this: whole card */}
-            {/* <RelatedSongs 
-                data={data}
-                isPlaying={isPlaying}
-                activeSong={activeSong}
-                handlePauseClick={handlePauseClick}
-                handlePlayClick={handlePlayClick}
-            /> */}
         </div>
     )
 };
