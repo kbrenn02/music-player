@@ -35,14 +35,13 @@ const TopChartCard = ({ song, i, isPlaying, activeSong, handlePauseClick, handle
             handlePlay={handlePlayClick}
         />
     </div>
-) 
+)
 
 
 const TopPlay = () => {
     const dispatch = useDispatch();
     const { activeSong, isPlaying } = useSelector((state) => state.player);
     const { data, isFetching } = useGetTopChartsQuery();
-    // const { data: songData, isFetching: isFetchingSongDetails } = useGetSongDetailsQuery(songid)
     const divRef = useRef(null);
 
     useEffect(() => {
@@ -51,86 +50,9 @@ const TopPlay = () => {
 
     const topPlays = data?.slice(0, 5);
     const artistIds = topPlays?.map((song) => song?.relationships?.artists?.data[0].id);
-    // const songIds = topPlays?.map((song) => song?.id)
     console.log("topPlays", topPlays)
     console.log('artistIDs', artistIds)
-    console.log('songIds:', songIds)
-    const [songIds, setSongIds] = useState(null);
-    const [artistImages, setArtistImages] = useState([]);
 
-    useEffect(() => {
-        if (!isFetching && data) {
-            const songIds = topPlays.map((song) => song?.id);
-            console.log(songIds);
-        
-            // If you need to fetch song details using the song IDs:
-            const artistImg = songIds.map((id) => useGetSongDetailsQuery(id));
-            console.log(artistImg);
-          }
-        }, [isFetching, data]);
-
-
-
-    // useEffect(({ songIds }) => {
-
-    //     console.log('useEffect triggered');
-
-    //     const fetchedDetails = []
-
-    //     const fetchDetails = async () => {
-    //         for (let i = 0; i < songIds.length; i++) {
-    //             // You need to call your hook once per songId and handle the result
-    //             const { data } = useGetSongDetailsQuery(songIds[i]);
-    //             if (data) {
-    //                 fetchedDetails.push(data);
-    //             }
-    //         }
-    //         // After fetching all details, set them in the state
-    //         setArtistImages(fetchedDetails);
-    //     };
-
-    //     fetchDetails();
-    // }, [songIds]);
-  
-        // if (isFetchingSongDetails) {
-        //     console.log('Still fetching song details...');
-        // } else {
-        //     console.log('Fetching complete, songData:', songData);}
-
-        // console.log(songData.resources)
-
-    //     if (songData && songData.resources.artists) {
-    //         const artistId = Object.keys(songData?.resources?.artists)[0]; // Get the first artist ID
-    //         const artistData = songData?.resources?.artists[artistId];
-            
-    //         if (artistData) {
-    //           console.log('artist data:', artistData);  // Use artistData safely
-    //           setArtistId(artistId);    // Set artistId in state if valid
-    //         } else {
-    //           console.warn('Artist data is undefined or null');
-    //         }
-    //     }
-
-    //     if (songData && songData.resources.lyrics) {
-    //         const lyricId = Object.keys(songData?.resources?.lyrics)[0];
-    //         const lyricAttributes = songData?.resources?.lyrics[lyricId]?.attributes;
-    //         const lyricData = songData?.resources?.lyrics[lyricId];
-
-    //         if (lyricAttributes){
-    //             console.log('lyric attributes', lyricAttributes);
-    //             setLyrics(lyricAttributes.text);
-    //             setType(lyricData.type);
-    //             console.log(lyrics)
-    //         } else {
-    //             console.warn('There is no lyric data')
-    //         }
-    //     }
-    //   }, [isFetchingSongDetails, songData]);
-    // })
-
-    // const artistImages = artistIds?.map(id => (
-    //     <ArtistDetails key={id} artistId={id} />
-    // ));
 
     const handlePauseClick = () => {
         dispatch(playPause(false));
@@ -188,11 +110,10 @@ const TopPlay = () => {
                             style={{ width: '25%', height: 'auto'}}
                             className="shadow-lg rounded-full animate-slideright"
                         >
-                            <Link to={`/artists/${song?.relationships?.artists?.data[0].id}`}>
-                                {/* Fix this: show the artist image for the top 5 artists without loading */}
-                                {/* {artistImages[i]} */}
-                                Blah
-                            </Link>
+                            <img
+                                className="shadow-lg rounded-full"
+                                src={song.attributes.artwork.url} alt={song.attributes.name} 
+                            />
                         </SwiperSlide>
                     ))}
                 </Swiper>
