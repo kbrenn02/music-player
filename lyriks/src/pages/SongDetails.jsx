@@ -26,19 +26,6 @@ const SongDetails = () => {
         dispatch(playPause(true));
     }
 
-    // const lyricsData = songData.resources.lyrics
-    // const lyricsKeys = Object.keys(lyricsData);
-    // const dynamicKey = lyricsKeys[0]; // Assuming there's only one key, or modify to handle multiple keys
-    
-    // const attributes = lyricsData[dynamicKey].attributes;
-    // const lyricsText = attributes.text;
-    // console.log(lyricsText)
-    console.log('chosen song', songid)
-    // console.log('artist: ', artistId)
-    console.log('chosen song data', songData)
-    // Fixed this: looks like the getsongrelatedquery is showing the same data as the getsongdetailsquery
-    console.log("related songs data: ", data)
-
     useEffect(() => {
 
         console.log('useEffect triggered');
@@ -46,12 +33,11 @@ const SongDetails = () => {
         if (isFetchingSongDetails) {
             console.log('Still fetching song details...');
         } else {
-            console.log('Fetching complete, songData:', songData);}
-
-        // console.log(songData.resources)
+            console.log('Fetching complete, songData:', songData);
+        }
 
         if (songData && songData.resources.artists) {
-            const artistId = Object.keys(songData?.resources?.artists)[0]; // Get the first artist ID
+            const artistId = Object.keys(songData?.resources?.artists)[0]; // Get the first item in artists array
             const artistData = songData?.resources?.artists[artistId];
             const titleId = Object.keys(songData?.resources['shazam-songs'])[0];
             const title = songData?.resources['shazam-songs'][titleId];
@@ -98,7 +84,7 @@ const SongDetails = () => {
 
                 <div className="mt-5">
                     {type === 'lyrics'
-                    // Fixed this: show the lyrics for a song. Any song
+                    // Show the lyrics for a song
                         ? lyrics.map((line, i) => (
                             <p key={i} className="text-gray-400 text-base my-1">{line}</p>
                         )) :<p className="text-gray-400 text-base my-1">Sorry, no lyrics found</p>}

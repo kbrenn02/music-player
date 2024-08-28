@@ -12,8 +12,6 @@ const Discover = () => {
 
     const genreTitle = genres.find(({ value }) => value === genreListId)?.title
 
-    console.log("Top charts data: ", data)
-
     if(isFetching) return <Loader title="Loading songs..." />;
 
     if(error) return <Error />

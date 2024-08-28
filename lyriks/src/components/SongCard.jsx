@@ -17,7 +17,6 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
         dispatch(playPause(true));
     }
 
-
     return (
         <div className="flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 
         backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
@@ -35,8 +34,6 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
                 </div>
                 <img alt="song_img" src={song.attributes.artwork.url} />
             </div>
-
-{/* Will have to adjust where the links send the user after we demonstrate it in the video */}
 
             <div className="mt-4 flex flex-col">
                 <p className="font-semibold text-lg text-white truncate">

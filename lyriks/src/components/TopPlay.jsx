@@ -50,9 +50,6 @@ const TopPlay = () => {
 
     const topPlays = data?.slice(0, 5);
     const artistIds = topPlays?.map((song) => song?.relationships?.artists?.data[0].id);
-    console.log("topPlays", topPlays)
-    console.log('artistIDs', artistIds)
-
 
     const handlePauseClick = () => {
         dispatch(playPause(false));
@@ -118,7 +115,6 @@ const TopPlay = () => {
                     ))}
                 </Swiper>
             </div>
-            
         </div>
     )
 }
